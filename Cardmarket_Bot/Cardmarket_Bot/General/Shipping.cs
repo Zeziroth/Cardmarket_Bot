@@ -46,5 +46,20 @@ namespace Cardmarket_Bot.General
             { "Courrier Parcel with Full Insurance (Flat Fee) 50k", new Shipping(8000, 50000d, 100d, true) },
             { "Courrier Parcel with Full Insurance (Flat Fee) 100k", new Shipping(8000, 100000d, 200d, true) }
         };
+
+        public static double GetShippingPrice(int count, double price, bool onlyTracking = false)
+        {
+            foreach (string shippingType in ShippingList.Keys)
+            {
+                Shipping shipping = ShippingList[shippingType];
+
+                if (count <= shipping.MaxCount && price <= shipping.MaxPrice && (!onlyTracking || shipping.HasTracking == onlyTracking))
+                {
+                    return shipping.Price;
+                }
+            }
+
+            return double.MaxValue;
+        }
     }
 }

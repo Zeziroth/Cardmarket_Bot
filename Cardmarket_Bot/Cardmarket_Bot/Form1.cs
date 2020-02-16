@@ -15,6 +15,7 @@ using Cardmarket_Bot.Expansion;
 using Cardmarket_Bot.Single;
 using Cardmarket_Bot.Product;
 using Cardmarket_Bot.Article;
+using Cardmarket_Bot.General;
 
 namespace Cardmarket_Bot
 {
@@ -24,13 +25,41 @@ namespace Cardmarket_Bot
         {
             InitializeComponent();
         }
-
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBox_Foil.SelectedIndex = 0;
+            comboBox_FirstEdition.SelectedIndex = 0;
+            comboBox_Condition.SelectedIndex = 0;
+            comboBox_Bulk.SelectedIndex = 0;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            LoadGames();
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            LoadExpansions();
+        }
+
+        private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            LoadSingles();
+        }
+        private void listView3_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            LoadArticles();
+        }
+        private void bulkBuyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadBulk();
+        }
+        public void LoadGames()
         {
             GameRoot games = Controller.GetGames();
             listView_Game.Items.Clear();
@@ -41,8 +70,7 @@ namespace Cardmarket_Bot
                 ListViewAddItem(listView_Game, itm, label_Game);
             }
         }
-
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        public void LoadExpansions()
         {
             if (listView_Game.SelectedItems.Count == 1)
             {
@@ -57,8 +85,7 @@ namespace Cardmarket_Bot
                 }
             }
         }
-
-        private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
+        public void LoadSingles()
         {
             if (listView_Expansion.SelectedItems.Count == 1)
             {
@@ -73,8 +100,7 @@ namespace Cardmarket_Bot
                 }
             }
         }
-
-        private void listView3_MouseDoubleClick(object sender, MouseEventArgs e)
+        public void LoadArticles()
         {
             if (listView_Single.SelectedItems.Count == 1)
             {
@@ -123,95 +149,82 @@ namespace Cardmarket_Bot
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void LoadBulk()
         {
-            comboBox_Foil.SelectedIndex = 0;
-            comboBox_FirstEdition.SelectedIndex = 0;
-            comboBox_Condition.SelectedIndex = 0;
-        }
+            LoadSingles();
 
-        private void bulkBuyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            listView_Bulk.Items.Clear();
-            listView_Bulk.BringToFront();
-            Dictionary<string, List<double>> offers = new Dictionary<string, List<double>>();
-
-            foreach (ListViewItem singleItem in listView_Single.Items)
+            if (listView_Single.Items.Count > 0)
             {
-                ArticleRoot articles = Controller.GetArticles((int)singleItem.Tag);
+                listView_Bulk.Items.Clear();
+                listView_Bulk.BringToFront();
+                Dictionary<string, List<double>> offers = new Dictionary<string, List<double>>();
 
-                int isFoil = -1;
-                switch (comboBox_Foil.Text)
+                foreach (ListViewItem singleItem in listView_Single.Items)
                 {
-                    case "Yes":
-                        isFoil = 1;
-                        break;
+                    ArticleRoot articles = Controller.GetArticles((int)singleItem.Tag);
 
-                    case "No":
-                        isFoil = 0;
-                        break;
-                }
-
-                int isFirstEdition = -1;
-                switch (comboBox_FirstEdition.Text)
-                {
-                    case "Yes":
-                        isFirstEdition = 1;
-                        break;
-
-                    case "No":
-                        isFirstEdition = 0;
-                        break;
-                }
-
-                string condition = comboBox_Condition.Text;
-
-                if (condition == "-")
-                {
-                    condition = "";
-                }
-
-
-                Article.Article article = articles.GetArticleByFilter("German", condition, isFoil, isFirstEdition).OrderBy(a => a.price).First();
-
-                ListViewItem itmNew = new ListViewItem("(" + singleItem.Text + ") " + article.seller.username + " // " + article.price);
-                itmNew.Tag = article.price;
-                ListViewAddItem(listView_Bulk, itmNew, label_Bulk);
-                if (!offers.ContainsKey(article.seller.username))
-                {
-                    offers.Add(article.seller.username, new List<double>());
-                }
-                offers[article.seller.username].Add(article.price);
-                Application.DoEvents();
-            }
-
-            double price = 0.0;
-
-            foreach (string sellers in offers.Keys)
-            {
-                double currentPrice = offers[sellers].Sum();
-                int currentCount = offers[sellers].Count();
-
-                price += currentPrice;
-
-                if (currentCount <= 4)
-                {
-                    if (currentPrice <= 25d)
+                    int isFoil = -1;
+                    switch (comboBox_Foil.Text)
                     {
-                        price += 1.10d;
+                        case "Yes":
+                            isFoil = 1;
+                            break;
+
+                        case "No":
+                            isFoil = 0;
+                            break;
                     }
-                }
-                else if (currentCount <= 17)
-                {
 
-                }
-                else if (currentCount <= 200)
-                {
+                    int isFirstEdition = -1;
+                    switch (comboBox_FirstEdition.Text)
+                    {
+                        case "Yes":
+                            isFirstEdition = 1;
+                            break;
 
+                        case "No":
+                            isFirstEdition = 0;
+                            break;
+                    }
+
+                    string condition = comboBox_Condition.Text;
+
+                    if (condition == "-")
+                    {
+                        condition = "";
+                    }
+
+
+                    Article.Article article = articles.GetArticleByFilter("German", condition, isFoil, isFirstEdition).OrderBy(a => a.price).First();
+
+                    ListViewItem itmNew = new ListViewItem("(" + singleItem.Text + ") " + article.seller.username + " // " + article.price);
+                    itmNew.Tag = article.price;
+                    ListViewAddItem(listView_Bulk, itmNew, label_Bulk);
+                    if (!offers.ContainsKey(article.seller.username))
+                    {
+                        offers.Add(article.seller.username, new List<double>());
+                    }
+                    offers[article.seller.username].Add(article.price);
+                    Application.DoEvents();
                 }
+
+                double price = 0.0;
+
+                foreach (string sellers in offers.Keys)
+                {
+                    double currentPrice = offers[sellers].Sum();
+                    int currentCount = offers[sellers].Count();
+
+                    price += currentPrice;
+                    price += Shipping.GetShippingPrice(currentCount, currentPrice, (comboBox_Bulk.Text == "YES"));
+                }
+
+                label_Bulk_Price.Text = "Price: " + Math.Round(price, 2);
             }
-
-            label_Bulk_Price.Text = "Price: " + Math.Round(price, 2);
+            else
+            {
+                MessageBox.Show("No singles for Bulk-Function");
+            }
         }
 
         public void ListViewAddItem(ListView list, ListViewItem item, Label lbl = null)
