@@ -134,6 +134,8 @@ namespace Cardmarket_Bot
         {
             listView_Bulk.Items.Clear();
             listView_Bulk.BringToFront();
+            Dictionary<string, List<double>> offers = new Dictionary<string, List<double>>();
+
             foreach (ListViewItem singleItem in listView_Single.Items)
             {
                 ArticleRoot articles = Controller.GetArticles((int)singleItem.Tag);
@@ -173,11 +175,43 @@ namespace Cardmarket_Bot
                 Article.Article article = articles.GetArticleByFilter("German", condition, isFoil, isFirstEdition).OrderBy(a => a.price).First();
 
                 ListViewItem itmNew = new ListViewItem("(" + singleItem.Text + ") " + article.seller.username + " // " + article.price);
-                itmNew.Tag = article.idArticle;
+                itmNew.Tag = article.price;
                 ListViewAddItem(listView_Bulk, itmNew, label_Bulk);
+                if (!offers.ContainsKey(article.seller.username))
+                {
+                    offers.Add(article.seller.username, new List<double>());
+                }
+                offers[article.seller.username].Add(article.price);
                 Application.DoEvents();
             }
-            MessageBox.Show("DONE");
+
+            double price = 0.0;
+
+            foreach (string sellers in offers.Keys)
+            {
+                double currentPrice = offers[sellers].Sum();
+                int currentCount = offers[sellers].Count();
+
+                price += currentPrice;
+
+                if (currentCount <= 4)
+                {
+                    if (currentPrice <= 25d)
+                    {
+                        price += 1.10d;
+                    }
+                }
+                else if (currentCount <= 17)
+                {
+
+                }
+                else if (currentCount <= 200)
+                {
+
+                }
+            }
+
+            label_Bulk_Price.Text = "Price: " + Math.Round(price, 2);
         }
 
         public void ListViewAddItem(ListView list, ListViewItem item, Label lbl = null)

@@ -54,6 +54,7 @@
             this.label_Single = new System.Windows.Forms.Label();
             this.label_Article = new System.Windows.Forms.Label();
             this.label_Bulk = new System.Windows.Forms.Label();
+            this.label_Bulk_Price = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -261,7 +262,7 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Article";
-            this.columnHeader5.Width = 180;
+            this.columnHeader5.Width = 230;
             // 
             // label_Game
             // 
@@ -308,11 +309,21 @@
             this.label_Bulk.TabIndex = 13;
             this.label_Bulk.Text = "Count: 0";
             // 
+            // label_Bulk_Price
+            // 
+            this.label_Bulk_Price.AutoSize = true;
+            this.label_Bulk_Price.Location = new System.Drawing.Point(812, 489);
+            this.label_Bulk_Price.Name = "label_Bulk_Price";
+            this.label_Bulk_Price.Size = new System.Drawing.Size(58, 13);
+            this.label_Bulk_Price.TabIndex = 13;
+            this.label_Bulk_Price.Text = "Price: 0.00";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 556);
+            this.Controls.Add(this.label_Bulk_Price);
             this.Controls.Add(this.label_Bulk);
             this.Controls.Add(this.label_Article);
             this.Controls.Add(this.label_Single);
@@ -369,6 +380,7 @@
         private System.Windows.Forms.Label label_Single;
         private System.Windows.Forms.Label label_Article;
         private System.Windows.Forms.Label label_Bulk;
+        private System.Windows.Forms.Label label_Bulk_Price;
     }
 }
 

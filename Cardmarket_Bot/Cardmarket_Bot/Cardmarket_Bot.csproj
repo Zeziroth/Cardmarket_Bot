@@ -76,6 +76,7 @@
     <Compile Include="General\Localization.cs" />
     <Compile Include="General\Localization2.cs" />
     <Compile Include="General\Localized.cs" />
+    <Compile Include="General\Shipping.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Message\MessageRoot.cs" />
     <Compile Include="Message\Thread.cs" />
