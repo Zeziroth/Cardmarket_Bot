@@ -79,7 +79,7 @@
     <Compile Include="Message\Message.cs" />
     <Compile Include="Message\MessageRoot.cs" />
     <Compile Include="Message\Thread.cs" />
-    <Compile Include="OAuthHeader.cs" />
+    <Compile Include="OAuthHeader_Rename to Prod.cs" />
     <Compile Include="OAuthHeader_Prod.cs" />
     <Compile Include="Product\PriceGuide.cs" />
     <Compile Include="Product\Product.cs" />
