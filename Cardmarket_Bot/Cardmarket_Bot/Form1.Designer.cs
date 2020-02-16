@@ -169,7 +169,7 @@
             this.listView_Article.Location = new System.Drawing.Point(568, 106);
             this.listView_Article.MultiSelect = false;
             this.listView_Article.Name = "listView_Article";
-            this.listView_Article.Size = new System.Drawing.Size(241, 377);
+            this.listView_Article.Size = new System.Drawing.Size(360, 377);
             this.listView_Article.TabIndex = 5;
             this.listView_Article.UseCompatibleStateImageBehavior = false;
             this.listView_Article.View = System.Windows.Forms.View.Details;
@@ -177,7 +177,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Article";
-            this.columnHeader4.Width = 230;
+            this.columnHeader4.Width = 350;
             // 
             // comboBox_Foil
             // 
@@ -259,9 +259,9 @@
             this.columnHeader5});
             this.listView_Bulk.FullRowSelect = true;
             this.listView_Bulk.HideSelection = false;
-            this.listView_Bulk.Location = new System.Drawing.Point(815, 106);
+            this.listView_Bulk.Location = new System.Drawing.Point(934, 106);
             this.listView_Bulk.Name = "listView_Bulk";
-            this.listView_Bulk.Size = new System.Drawing.Size(241, 377);
+            this.listView_Bulk.Size = new System.Drawing.Size(463, 377);
             this.listView_Bulk.TabIndex = 12;
             this.listView_Bulk.UseCompatibleStateImageBehavior = false;
             this.listView_Bulk.View = System.Windows.Forms.View.Details;
@@ -269,7 +269,7 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Article";
-            this.columnHeader5.Width = 230;
+            this.columnHeader5.Width = 450;
             // 
             // label_Game
             // 
@@ -310,7 +310,7 @@
             // label_Bulk
             // 
             this.label_Bulk.AutoSize = true;
-            this.label_Bulk.Location = new System.Drawing.Point(812, 90);
+            this.label_Bulk.Location = new System.Drawing.Point(931, 90);
             this.label_Bulk.Name = "label_Bulk";
             this.label_Bulk.Size = new System.Drawing.Size(47, 13);
             this.label_Bulk.TabIndex = 13;
@@ -319,7 +319,7 @@
             // label_Bulk_Price
             // 
             this.label_Bulk_Price.AutoSize = true;
-            this.label_Bulk_Price.Location = new System.Drawing.Point(812, 489);
+            this.label_Bulk_Price.Location = new System.Drawing.Point(931, 489);
             this.label_Bulk_Price.Name = "label_Bulk_Price";
             this.label_Bulk_Price.Size = new System.Drawing.Size(58, 13);
             this.label_Bulk_Price.TabIndex = 13;
@@ -329,7 +329,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(852, 11);
+            this.label4.Location = new System.Drawing.Point(1193, 11);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(204, 13);
             this.label4.TabIndex = 10;
@@ -342,9 +342,9 @@
             this.comboBox_Bulk.Items.AddRange(new object[] {
             "NO",
             "YES"});
-            this.comboBox_Bulk.Location = new System.Drawing.Point(855, 28);
+            this.comboBox_Bulk.Location = new System.Drawing.Point(1156, 28);
             this.comboBox_Bulk.Name = "comboBox_Bulk";
-            this.comboBox_Bulk.Size = new System.Drawing.Size(201, 21);
+            this.comboBox_Bulk.Size = new System.Drawing.Size(241, 21);
             this.comboBox_Bulk.TabIndex = 14;
             // 
             // label5
@@ -391,7 +391,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(812, 77);
+            this.label9.Location = new System.Drawing.Point(931, 77);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(124, 13);
             this.label9.TabIndex = 7;
@@ -401,7 +401,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 556);
+            this.ClientSize = new System.Drawing.Size(1404, 547);
             this.Controls.Add(this.comboBox_Bulk);
             this.Controls.Add(this.label_Bulk_Price);
             this.Controls.Add(this.label_Bulk);

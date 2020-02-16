@@ -142,7 +142,7 @@ namespace Cardmarket_Bot
                 listView_Article.BringToFront();
                 foreach (Article.Article article in articles.GetArticleByFilter("German", condition, isFoil, isFirstEdition))
                 {
-                    ListViewItem itmNew = new ListViewItem(article.seller.username + " // " + article.price);
+                    ListViewItem itmNew = new ListViewItem(article.ToString());
                     itmNew.Tag = article.idArticle;
                     ListViewAddItem(listView_Article, itmNew, label_Article);
                 }
@@ -152,7 +152,7 @@ namespace Cardmarket_Bot
         public void LoadBulk()
         {
             LoadSingles();
-
+            double price = 0.0;
             if (listView_Single.Items.Count > 0)
             {
                 listView_Bulk.Items.Clear();
@@ -197,7 +197,7 @@ namespace Cardmarket_Bot
 
                     Article.Article article = articles.GetArticleByFilter("German", condition, isFoil, isFirstEdition).OrderBy(a => a.price).First();
 
-                    ListViewItem itmNew = new ListViewItem("(" + singleItem.Text + ") " + article.seller.username + " // " + article.price);
+                    ListViewItem itmNew = new ListViewItem("(" + singleItem.Text + ") " + article.ToString());
                     itmNew.Tag = article.price;
                     ListViewAddItem(listView_Bulk, itmNew, label_Bulk);
                     if (!offers.ContainsKey(article.seller.username))
@@ -205,21 +205,22 @@ namespace Cardmarket_Bot
                         offers.Add(article.seller.username, new List<double>());
                     }
                     offers[article.seller.username].Add(article.price);
+
+                    price = 0d;
+                    foreach (string sellers in offers.Keys)
+                    {
+                        double currentPrice = offers[sellers].Sum();
+                        int currentCount = offers[sellers].Count();
+
+                        price += currentPrice;
+                        price += Shipping.GetShippingPrice(currentCount, currentPrice, (comboBox_Bulk.Text == "YES"));
+                    }
+                    
+                    label_Bulk_Price.Text = "Price: " + String.Format("{0:0.00}", price);
+
                     Application.DoEvents();
                 }
 
-                double price = 0.0;
-
-                foreach (string sellers in offers.Keys)
-                {
-                    double currentPrice = offers[sellers].Sum();
-                    int currentCount = offers[sellers].Count();
-
-                    price += currentPrice;
-                    price += Shipping.GetShippingPrice(currentCount, currentPrice, (comboBox_Bulk.Text == "YES"));
-                }
-
-                label_Bulk_Price.Text = "Price: " + Math.Round(price, 2);
             }
             else
             {
