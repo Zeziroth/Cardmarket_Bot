@@ -13,7 +13,7 @@ namespace Cardmarket_Bot
             String url = String.Format(Settings.API_ENDPOINT + customURL, args);
 
             HttpWebRequest request = WebRequest.CreateHttp(url) as HttpWebRequest;
-            OAuthHeader header = new OAuthHeader();
+            OAuthHeader_Prod header = new OAuthHeader_Prod();
             request.Headers.Add(HttpRequestHeader.Authorization, header.getAuthorizationHeader(method, url));
             request.Method = method;
 
