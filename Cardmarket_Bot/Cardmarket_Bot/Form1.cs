@@ -155,12 +155,16 @@ namespace Cardmarket_Bot
             double price = 0.0;
             if (listView_Single.Items.Count > 0)
             {
-                listView_Bulk.Items.Clear();
-                listView_Bulk.BringToFront();
-                Dictionary<string, List<double>> offers = new Dictionary<string, List<double>>();
+                progressBar1.Value = 0;
+                progressBar1.Maximum = listView_Single.Items.Count;
 
-                foreach (ListViewItem singleItem in listView_Single.Items)
+                Dictionary<string, List<double>> offers = new Dictionary<string, List<double>>();
+                List<string> notFoundCards = new List<string>();
+
+                for (int i = 0; i < listView_Single.Items.Count; i++)
                 {
+                    progressBar1.Value = i + 1;
+                    ListViewItem singleItem = listView_Single.Items[i];
                     ArticleRoot articles = Controller.GetArticles((int)singleItem.Tag);
 
                     int isFoil = -1;
@@ -194,17 +198,45 @@ namespace Cardmarket_Bot
                         condition = "";
                     }
 
+                    Article.Article article = null;
 
-                    Article.Article article = articles.GetArticleByFilter("German", condition, isFoil, isFirstEdition).OrderBy(a => a.price).First();
 
-                    ListViewItem itmNew = new ListViewItem("(" + singleItem.Text + ") " + article.ToString());
-                    itmNew.Tag = article.price;
-                    ListViewAddItem(listView_Bulk, itmNew, label_Bulk);
-                    if (!offers.ContainsKey(article.seller.username))
+                    try
                     {
-                        offers.Add(article.seller.username, new List<double>());
+                        article = articles.GetArticleByFilter("German", condition, isFoil, isFirstEdition).OrderBy(a => a.price).First();
                     }
-                    offers[article.seller.username].Add(article.price);
+                    catch { }
+
+
+                    if (article != null)
+                    {
+
+                        if (!offers.ContainsKey(article.seller.username))
+                        {
+                            offers.Add(article.seller.username, new List<double>());
+                        }
+                        offers[article.seller.username].Add(article.price);
+
+                        bool match = false;
+                        foreach (TreeNode node in treeView_Bulk.Nodes)
+                        {
+                            if (node.Text == article.seller.username)
+                            {
+                                match = true;
+                                node.Nodes.Add("(" + singleItem.Text + ") " + article.ToString());
+                            }
+                        }
+                        if (!match)
+                        {
+                            TreeNode userNode = treeView_Bulk.Nodes.Add(article.seller.username);
+                            userNode.Nodes.Add("(" + singleItem.Text + ") " + article.ToString());
+                        }
+                    }
+                    else
+                    {
+                        notFoundCards.Add("(" + singleItem.Text + ")");
+                    }
+
 
                     price = 0d;
                     foreach (string sellers in offers.Keys)
@@ -215,10 +247,19 @@ namespace Cardmarket_Bot
                         price += currentPrice;
                         price += Shipping.GetShippingPrice(currentCount, currentPrice, (comboBox_Bulk.Text == "YES"));
                     }
-                    
+
                     label_Bulk_Price.Text = "Price: " + String.Format("{0:0.00}", price);
 
                     Application.DoEvents();
+                }
+                progressBar1.Value = 0;
+                if (notFoundCards.Count > 0)
+                {
+                    TreeNode notFoundNode = treeView_Bulk.Nodes.Add("Not found");
+                    foreach (string lost in notFoundCards)
+                    {
+                        notFoundNode.Nodes.Add(lost);
+                    }
                 }
 
             }

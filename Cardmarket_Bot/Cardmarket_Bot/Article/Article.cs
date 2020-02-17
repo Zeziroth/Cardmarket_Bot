@@ -25,7 +25,7 @@ namespace Cardmarket_Bot.Article
 
         public string ToString()
         {
-            return String.Format("{0} // {1} // {2} // ⭐: {3} // 1.Ed: {4} // {5}", seller.username, language.languageName ,condition, isFoil, isFirstEd, String.Format("{0:0.00}", price));
+            return String.Format("{1} // {2} // ⭐: {3} // 1.Ed: {4} // {5}", seller.username, language.languageName ,condition, isFoil, isFirstEd, String.Format("{0:0.00}", price));
         }
     }
 }

@@ -35,10 +35,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.listView_Expansion = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listView_Single = new System.Windows.Forms.ListView();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bulkBuyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listView_Single = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listView_Article = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.comboBox_Foil = new System.Windows.Forms.ComboBox();
@@ -47,13 +47,10 @@
             this.comboBox_FirstEdition = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox_Condition = new System.Windows.Forms.ComboBox();
-            this.listView_Bulk = new System.Windows.Forms.ListView();
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label_Game = new System.Windows.Forms.Label();
             this.label_Expansion = new System.Windows.Forms.Label();
             this.label_Single = new System.Windows.Forms.Label();
             this.label_Article = new System.Windows.Forms.Label();
-            this.label_Bulk = new System.Windows.Forms.Label();
             this.label_Bulk_Price = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox_Bulk = new System.Windows.Forms.ComboBox();
@@ -62,6 +59,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.treeView_Bulk = new System.Windows.Forms.TreeView();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +78,7 @@
             // 
             this.listView_Game.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
+            this.listView_Game.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listView_Game.FullRowSelect = true;
             this.listView_Game.HideSelection = false;
             this.listView_Game.Location = new System.Drawing.Point(12, 106);
@@ -110,6 +110,7 @@
             this.listView_Expansion.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.listView_Expansion.ContextMenuStrip = this.contextMenuStrip1;
+            this.listView_Expansion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listView_Expansion.FullRowSelect = true;
             this.listView_Expansion.HideSelection = false;
             this.listView_Expansion.Location = new System.Drawing.Point(169, 106);
@@ -126,10 +127,25 @@
             this.columnHeader2.Text = "Expansion";
             this.columnHeader2.Width = 180;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bulkBuyToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 26);
+            // 
+            // bulkBuyToolStripMenuItem
+            // 
+            this.bulkBuyToolStripMenuItem.Name = "bulkBuyToolStripMenuItem";
+            this.bulkBuyToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.bulkBuyToolStripMenuItem.Text = "Bulk Buy";
+            this.bulkBuyToolStripMenuItem.Click += new System.EventHandler(this.bulkBuyToolStripMenuItem_Click);
+            // 
             // listView_Single
             // 
             this.listView_Single.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3});
+            this.listView_Single.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listView_Single.FullRowSelect = true;
             this.listView_Single.HideSelection = false;
             this.listView_Single.Location = new System.Drawing.Point(368, 106);
@@ -145,20 +161,6 @@
             // 
             this.columnHeader3.Text = "Single";
             this.columnHeader3.Width = 180;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bulkBuyToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 26);
-            // 
-            // bulkBuyToolStripMenuItem
-            // 
-            this.bulkBuyToolStripMenuItem.Name = "bulkBuyToolStripMenuItem";
-            this.bulkBuyToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.bulkBuyToolStripMenuItem.Text = "Bulk Buy";
-            this.bulkBuyToolStripMenuItem.Click += new System.EventHandler(this.bulkBuyToolStripMenuItem_Click);
             // 
             // listView_Article
             // 
@@ -253,24 +255,6 @@
             this.comboBox_Condition.Size = new System.Drawing.Size(194, 21);
             this.comboBox_Condition.TabIndex = 11;
             // 
-            // listView_Bulk
-            // 
-            this.listView_Bulk.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader5});
-            this.listView_Bulk.FullRowSelect = true;
-            this.listView_Bulk.HideSelection = false;
-            this.listView_Bulk.Location = new System.Drawing.Point(934, 106);
-            this.listView_Bulk.Name = "listView_Bulk";
-            this.listView_Bulk.Size = new System.Drawing.Size(463, 377);
-            this.listView_Bulk.TabIndex = 12;
-            this.listView_Bulk.UseCompatibleStateImageBehavior = false;
-            this.listView_Bulk.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Article";
-            this.columnHeader5.Width = 450;
-            // 
             // label_Game
             // 
             this.label_Game.AutoSize = true;
@@ -307,19 +291,10 @@
             this.label_Article.TabIndex = 13;
             this.label_Article.Text = "Count: 0";
             // 
-            // label_Bulk
-            // 
-            this.label_Bulk.AutoSize = true;
-            this.label_Bulk.Location = new System.Drawing.Point(931, 90);
-            this.label_Bulk.Name = "label_Bulk";
-            this.label_Bulk.Size = new System.Drawing.Size(47, 13);
-            this.label_Bulk.TabIndex = 13;
-            this.label_Bulk.Text = "Count: 0";
-            // 
             // label_Bulk_Price
             // 
             this.label_Bulk_Price.AutoSize = true;
-            this.label_Bulk_Price.Location = new System.Drawing.Point(931, 489);
+            this.label_Bulk_Price.Location = new System.Drawing.Point(931, 502);
             this.label_Bulk_Price.Name = "label_Bulk_Price";
             this.label_Bulk_Price.Size = new System.Drawing.Size(58, 13);
             this.label_Bulk_Price.TabIndex = 13;
@@ -391,25 +366,39 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(931, 77);
+            this.label9.Location = new System.Drawing.Point(931, 90);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(124, 13);
             this.label9.TabIndex = 7;
             this.label9.Text = "Offers (Bulk Version)";
             // 
+            // treeView_Bulk
+            // 
+            this.treeView_Bulk.Location = new System.Drawing.Point(934, 106);
+            this.treeView_Bulk.Name = "treeView_Bulk";
+            this.treeView_Bulk.Size = new System.Drawing.Size(463, 377);
+            this.treeView_Bulk.TabIndex = 15;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(934, 489);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(463, 10);
+            this.progressBar1.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1404, 547);
+            this.ClientSize = new System.Drawing.Size(1406, 547);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.treeView_Bulk);
             this.Controls.Add(this.comboBox_Bulk);
             this.Controls.Add(this.label_Bulk_Price);
-            this.Controls.Add(this.label_Bulk);
             this.Controls.Add(this.label_Article);
             this.Controls.Add(this.label_Single);
             this.Controls.Add(this.label_Expansion);
             this.Controls.Add(this.label_Game);
-            this.Controls.Add(this.listView_Bulk);
             this.Controls.Add(this.comboBox_Condition);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -459,13 +448,10 @@
         private System.Windows.Forms.ComboBox comboBox_Condition;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem bulkBuyToolStripMenuItem;
-        private System.Windows.Forms.ListView listView_Bulk;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.Label label_Game;
         private System.Windows.Forms.Label label_Expansion;
         private System.Windows.Forms.Label label_Single;
         private System.Windows.Forms.Label label_Article;
-        private System.Windows.Forms.Label label_Bulk;
         private System.Windows.Forms.Label label_Bulk_Price;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox_Bulk;
@@ -474,6 +460,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TreeView treeView_Bulk;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
