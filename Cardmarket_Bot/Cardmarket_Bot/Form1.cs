@@ -155,6 +155,7 @@ namespace Cardmarket_Bot
             double price = 0.0;
             if (listView_Single.Items.Count > 0)
             {
+                treeView_Bulk.Nodes.Clear();
                 progressBar1.Value = 0;
                 progressBar1.Maximum = listView_Single.Items.Count;
 
